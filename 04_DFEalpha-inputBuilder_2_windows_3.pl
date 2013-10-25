@@ -26,7 +26,6 @@ my (@window_0f, @window_4f, @m_Dmel_0f, @m_Dmel_4f, @m_Dyak_0f, @m_Dyak_4f, @tot
 my $counter_0f = 0;
 my $counter_4f = 0;
 my (@AoA_0f, @AoA_4f) = ();
-my ($numElementsVectorSFS_0f, $numElementsVectorSFS_4f);
 
 while (my $line = <$inputFile_fh>) {
     chomp($line);
@@ -44,10 +43,7 @@ while (my $line = <$inputFile_fh>) {
         push @divergents_0f, $divergents_0f;
 
         #@vectorSFS_0f = split ":", $splitted[8];
-        #$numElementsVectorSFS_0f = split ":", $splitted[8];
         my @dummyArray = split ":", $splitted[8];   # dummy array, just to get nº items in next line
-        $numElementsVectorSFS_0f = @dummyArray;
-        #say "Número elementos en vector SFS 0f \$numElementsVectorSFS_0f '$numElementsVectorSFS_0f'";
         push @vectorSFS_0f, split ":", $splitted[8];
 
         push @{ $AoA_0f[$counter_0f] }, @vectorSFS_0f;
@@ -65,9 +61,7 @@ while (my $line = <$inputFile_fh>) {
         push @divergents_4f, $divergents_4f;
 
         #@vectorSFS_4f = split ":", $splitted[8];
-        #$numElementsVectorSFS_4f = split ":", $splitted[8];
         my @dummyArray = split ":", $splitted[8];   # dummy array, just to get nº items in next line
-        $numElementsVectorSFS_4f = @dummyArray;
         push @vectorSFS_4f, split ":", $splitted[8];
 
         push @{ $AoA_4f[$counter_4f] }, @vectorSFS_4f;
@@ -109,7 +103,9 @@ foreach my $window (@window_0f) {
 
   # Calculate header Selective
     my $sumVectorSFS_0f; 
-    foreach my $i (0 .. $numElementsVectorSFS_0f-1) {
+    #foreach my $i (0 .. $numElementsVectorSFS_0f-1) {
+    # HERE SUBSTITUTE the variable num for something like $# OR scalar(@)
+    #foreach my $i (0 .. $numElementsVectorSFS_0f-1) {
         $sumVectorSFS_0f += $vectorSFS_0f[$i];
     }
         #say "la suma de todos vale \$sumVectorSFS_0f '$sumVectorSFS_0f'";
