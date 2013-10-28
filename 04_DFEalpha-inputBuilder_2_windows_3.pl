@@ -105,7 +105,7 @@ foreach my $window (@window_0f) {
     my $sumVectorSFS_0f; 
     #foreach my $i (0 .. $numElementsVectorSFS_0f-1) {
     # HERE SUBSTITUTE the variable num for something like $# OR scalar(@)
-    #foreach my $i (0 .. $numElementsVectorSFS_0f-1) {
+    foreach my $i (0 .. $#vectorSFS_0f) {
         $sumVectorSFS_0f += $vectorSFS_0f[$i];
     }
         #say "la suma de todos vale \$sumVectorSFS_0f '$sumVectorSFS_0f'";
@@ -117,7 +117,8 @@ foreach my $window (@window_0f) {
   # Format Selective SFS vector
     #@final_vectorSFS_0f = ( (0) x 127 );    # First, fill vector with 127 zeros!
     @final_vectorSFS_0f = ( (0) x 128 );    # First, fill vector with 127 zeros!
-    foreach my $j (0 .. $numElementsVectorSFS_0f-1) {   # Then, fill vector with corresponding values
+    #foreach my $j (0 .. $numElementsVectorSFS_0f-1) {   # Then, fill vector with corresponding values
+    foreach my $j (0 .. $#vectorSFS_0f) {   # Then, fill vector with corresponding values
         $final_vectorSFS_0f[$j] = $vectorSFS_0f[$j]
     }
 
@@ -129,7 +130,7 @@ foreach my $window (@window_0f) {
 
   # Calculate header Neutral
     my $sumVectorSFS_4f; 
-    foreach my $i (0 .. $numElementsVectorSFS_4f-1) {
+    foreach my $i (0 .. $#vectorSFS_4f) {
         $sumVectorSFS_4f += $vectorSFS_4f[$i];
     }
     my $header_4f = ($m_Dmel_4f[$counter_out_4f]) - $sumVectorSFS_4f;
@@ -140,7 +141,7 @@ foreach my $window (@window_0f) {
   # Format Neutral SFS vector
     #@final_vectorSFS_4f = ( (0) x 127 );    # First, fill vector with 127 zeros!
     @final_vectorSFS_4f = ( (0) x 128 );    # First, fill vector with 127 zeros!
-    foreach my $j (0 .. $numElementsVectorSFS_4f-1) {   # Then, fill vector with corresponding values
+    foreach my $j (0 .. $#vectorSFS_4f) {   # Then, fill vector with corresponding values
         $final_vectorSFS_4f[$j] = $vectorSFS_4f[$j]
     }
   # Print Neutral SFS vector

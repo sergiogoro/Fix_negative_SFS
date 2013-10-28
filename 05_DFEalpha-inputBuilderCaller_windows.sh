@@ -5,6 +5,6 @@
 for file in `ls | grep orth | grep 0y4 | grep -v DFE` #Select all files matching 'orth', select matching '0y4' exclude those matching 'DFE' (DFE files have already been processed by 04_DFEalpha_inputBuilder_2.pl)
 do
     echo "Processing file ${file}"
-    perl 04_DFEalpha-inputBuilder_2_windows_2.pl -input ${file}
+    perl 04_DFEalpha-inputBuilder_2_windows_3.pl -input ${file}
 done
 
