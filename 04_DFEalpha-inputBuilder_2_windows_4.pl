@@ -6,10 +6,19 @@
 
 # The inputs will be read by windows, and so, several output files will be created, one for each window.
 
+
+# # # Preamble
+
 use strict; use warnings; use feature 'say'; use Getopt::Long; use List::Util qw(sum); use Data::Dumper;
+
+
+# # # Global vars
 
 my $help = undef;
 my $inputFile;
+
+
+# # # Main
 
 usage() if (
     @ARGV < 1 or
@@ -18,9 +27,61 @@ usage() if (
         'input=s'   =>  \$inputFile,
     ) or defined $help);
 
+my $inputFile_fh = openFile($inputFile);
+readInput($inputFile_fh);
+
+
+# # # Subroutines
+
 sub usage {say "Usage: $0 -input <input file> [-help]"};
 
-open (my $inputFile_fh, "<", "$inputFile") or die "Couldn't open $inputFile $!";
+sub openFile {
+    my $inputFile = shift;
+    open (my $inputFile_fh, "<", "$inputFile") or die "Couldn't open $inputFile $!";
+    return $inputFile_fh;
+}
+
+sub readInput {
+    my $inputFile_fh = shift;
+    while ( my $line = <$inputFile_fh> ) {
+        chomp $line;
+        my @splitted = split "\t", $line;
+            my ($xfold, $chr_state) = split "-", $splitted[2];
+            if ($xfold == 0) {
+                # # #
+                my $window_0f = $splitted[1];
+                push @window_0f, $window_0f;
+
+                my ($m_Dmel_0f, $m_Dyak_0f) = split "-", $splitted[3];
+                push @m_Dmel_0f, $m_Dmel_0f;
+                push @m_Dyak_0f, $m_Dyak_0f;
+                my ($totalPol_0f, $divergents_0f) = split "-", $splitted[5];
+                push @totalPol_0f, $totalPol_0f;
+                push @divergents_0f, $divergents_0f;
+
+                #@vectorSFS_0f = split ":", $splitted[8];
+                my @dummyArray = split ":", $splitted[8];   # dummy array, just to get nº items in next line
+                push @vectorSFS_0f, split ":", $splitted[8];
+
+                push @{ $AoA_0f[$counter_0f] }, @vectorSFS_0f;
+                $counter_0f++;
+
+            } elsif ($xfold == 4) { #Ends if xfold==0
+                #
+                #
+                #
+            } #Ends if xfold==4
+
+    } #Ends while line
+} # Ends sub readInput
+
+
+
+
+
+
+
+# # # # OLD CODE BELOW:
 
 my (@window_0f, @window_4f, @m_Dmel_0f, @m_Dmel_4f, @m_Dyak_0f, @m_Dyak_4f, @totalPol_0f, @totalPol_4f, @divergents_0f, @divergents_4f, @vectorSFS_0f, @vectorSFS_4f, @final_vectorSFS_0f, @final_vectorSFS_4f);
 my $counter_0f = 0;
