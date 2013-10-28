@@ -30,21 +30,21 @@ my (@AoA_0f, @AoA_4f) = ();
 while (my $line = <$inputFile_fh>) {
     chomp($line);
     my @splitted = split "\t" , $line;
-    my ($xfold, $chr_state) = split "-", $splitted[2];
+    my ($xfold, $chr_state) = split '-', $splitted[2];
     if ($xfold == 0) {
         my $window_0f = $splitted[1];
         push @window_0f, $window_0f;
 
-        my ($m_Dmel_0f, $m_Dyak_0f) = split "-", $splitted[3];
+        my ($m_Dmel_0f, $m_Dyak_0f) = split '-', $splitted[3];
         push @m_Dmel_0f, $m_Dmel_0f;
         push @m_Dyak_0f, $m_Dyak_0f;
-        my ($totalPol_0f, $divergents_0f) = split "-", $splitted[5];
+        my ($totalPol_0f, $divergents_0f) = split '-', $splitted[5];
         push @totalPol_0f, $totalPol_0f;
         push @divergents_0f, $divergents_0f;
 
         #@vectorSFS_0f = split ":", $splitted[8];
-        my @dummyArray = split ":", $splitted[8];   # dummy array, just to get nº items in next line
-        push @vectorSFS_0f, split ":", $splitted[8];
+        my @dummyArray = split ':', $splitted[8];   # dummy array, just to get nº items in next line
+        push @vectorSFS_0f, split ':', $splitted[8];
 
         push @{ $AoA_0f[$counter_0f] }, @vectorSFS_0f;
         $counter_0f++;
@@ -53,16 +53,16 @@ while (my $line = <$inputFile_fh>) {
         my $window_4f = $splitted[1];
         push @window_4f, $window_4f;
 
-        my ($m_Dmel_4f, $m_Dyak_4f) = split "-", $splitted[3];
+        my ($m_Dmel_4f, $m_Dyak_4f) = split '-', $splitted[3];
         push @m_Dmel_4f, $m_Dmel_4f;
         push @m_Dyak_4f, $m_Dyak_4f;
-        my ($totalPol_4f, $divergents_4f) = split "-", $splitted[5];
+        my ($totalPol_4f, $divergents_4f) = split '-', $splitted[5];
         push @totalPol_4f, $totalPol_4f;
         push @divergents_4f, $divergents_4f;
 
         #@vectorSFS_4f = split ":", $splitted[8];
-        my @dummyArray = split ":", $splitted[8];   # dummy array, just to get nº items in next line
-        push @vectorSFS_4f, split ":", $splitted[8];
+        my @dummyArray = split ':', $splitted[8];   # dummy array, just to get nº items in next line
+        push @vectorSFS_4f, split ':', $splitted[8];
 
         push @{ $AoA_4f[$counter_4f] }, @vectorSFS_4f;
         $counter_4f++;
