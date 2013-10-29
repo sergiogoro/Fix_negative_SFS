@@ -84,7 +84,6 @@ while (my $line = <$inputFile_fh>) {
 my $counter_out_0f = 0;
 my $counter_out_4f = 0;
 foreach my $window (@window_0f) {
-    say "Ventana <$window>";
     my $outputFile = $inputFile . "_DFE-alpha_" . $window;
     open my $outputFile_fh, '>', $outputFile or die "Couldn't open output file '$outputFile' $!\n";
 
@@ -102,16 +101,14 @@ foreach my $window (@window_0f) {
     # Print Divergents Neutral
     say $outputFile_fh $divergents_4f[$counter_out_0f];
 
-#   # Calculate header Selective
+    # Calculate header Selective
     my $sumVectorSFS_0f = 0;
     foreach (@{ $AoA_0f[$counter_out_0f] } ) {
         $sumVectorSFS_0f += $_;
-        #say "element at \@vectorSFS_0f <$_>";       # VOID, NADA !!! no entra en el bucle, @vacio
     }
     my $header_0f = ($m_Dmel_0f[$counter_out_0f]) - $sumVectorSFS_0f;
-    say "\$header_0f <\t$header_0f\t>";
 
-#   # Print header Selective   # not newline, header followed by SFSselective vector
+    # Print header Selective   # not newline, header followed by SFSselective vector
     print $outputFile_fh $header_0f ;
 
     # Format Selective SFS vector
@@ -127,16 +124,14 @@ foreach my $window (@window_0f) {
     }
     print $outputFile_fh " \n";
 
-#   # Calculate header Neutral
+    # Calculate header Neutral
     my $sumVectorSFS_4f = 0;
     foreach ( @{ $AoA_4f[$counter_out_4f] } ) {
-        #say "element at \@vectorSFS_4f <$_>";       # ZEROS !!!!
         $sumVectorSFS_4f += $_;
     }
     my $header_4f = ($m_Dmel_4f[$counter_out_4f]) - $sumVectorSFS_4f;
-    say "\$header_4f <\t$header_4f\t>";
 
-#   # Print header Neutral   # not newline, header followed by SFSselective vector
+    # Print header Neutral   # not newline, header followed by SFSselective vector
     print $outputFile_fh $header_4f ;
 
     # Format Neutral SFS vector
@@ -144,15 +139,12 @@ foreach my $window (@window_0f) {
     @final_vectorSFS_4f = ( (0) x 128 );    # First, fill vector with 127 zeros!
     foreach my $k ( 0 .. scalar(@vectorSFS_4f)-1 ) {   # Then, fill vector with corresponding values
         $final_vectorSFS_4f[$k] = $vectorSFS_4f[$k];
-        #say "\$vectorSFS_4f[$k] <$vectorSFS_4f[$k]>";   # ZEROS !!!!
     }
     # Print Neutral SFS vector
     foreach (@final_vectorSFS_4f) {
         print $outputFile_fh " $_";
     }
     print $outputFile_fh " \n";
-    #say "dumpeo \@final_vectorSFS_4f";
-    #print Dumper \@final_vectorSFS_4f;
 
 $counter_out_0f++;
 $counter_out_4f++;
