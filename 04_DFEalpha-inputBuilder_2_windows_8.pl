@@ -83,7 +83,13 @@ while (my $line = <$inputFile_fh>) {
 # Open $ print to output files
 my $counter_out_0f = 0;
 my $counter_out_4f = 0;
-foreach my $window (@window_0f) {
+
+my @arr = ( scalar(@window_0f) <= scalar (@window_4f) )     # Ensure to select the smaller one. (To work only with windows shared between 0f and 4f)
+    ? (@window_0f)
+    : (@window_4f);
+
+#foreach my $window (@window_0f) {          # This line would mess up things in case: (number of 0f windows) != (number of 4f windows).
+foreach my $window (@arr) {                 # This line works, will traverse all the windows that have 0f and 4f. Discarding those that have one but not the other
     my $outputFile = $inputFile . "_DFE-alpha_" . $window;
     open my $outputFile_fh, '>', $outputFile or die "Couldn't open output file '$outputFile' $!\n";
 
@@ -97,9 +103,9 @@ foreach my $window (@window_0f) {
     # Print Divergents Selective
     say $outputFile_fh $divergents_0f[$counter_out_0f];
     # Print Total neutral # SUM m_Dyak_4f
-    say $outputFile_fh $m_Dyak_4f[$counter_out_0f];
+    say $outputFile_fh $m_Dyak_4f[$counter_out_4f];
     # Print Divergents Neutral
-    say $outputFile_fh $divergents_4f[$counter_out_0f];
+    say $outputFile_fh $divergents_4f[$counter_out_4f];
 
     # Calculate header Selective
     my $sumVectorSFS_0f = 0;
